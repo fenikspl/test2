@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "Co wybierasz?"
-select y in x y z Quit
+select y in aktualizacja installvnc z Quit
 do
   case $y in
     "x") ./aktualizacja.sh ;;
