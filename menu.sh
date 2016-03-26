@@ -1,13 +1,14 @@
 #!/bin/bash
 echo "Co wybierasz?"
-select y in X Y Z Quit
+select y in x y z Quit
 do
   case $y in
-    "X") echo "Wybrałeś X" ;;
-    "Y") echo "Wybrałeś Y" ;;
-    "Z") echo "Wybrałeś Z" ;;
+    "x") ./aktualizacja.sh ;;
+    "y") echo "Wybrales Y" ;;
+    "z") echo "Wybrales Z" ;;
     "Quit") exit ;;
-    *) echo "Nic nie wybrałeś"
+    *) echo "Nic nie wybrales"
   esac
 break
 done
+
