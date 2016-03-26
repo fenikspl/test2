@@ -1,5 +1,6 @@
 #! /bin/bash
 
+:program
 echo "Co wybierasz?"
 select x in install run quit
 do
@@ -11,4 +12,3 @@ do
   esac
 break
 done
-
