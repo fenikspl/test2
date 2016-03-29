@@ -31,17 +31,6 @@ class Base:
     def add_combo(self, widget):
         self.combo.append_text(self.textbox.get_text())
 
-    def about_win(self, widget):
-        about = gtk.AboutDialog()
-        about.set_program_name("My First GTK Python")
-        about.set_version("0.1")
-        about.set_copyright("(c) Fenikspl")
-        about.set_comments("This is my first GTK Program written in Python")
-        about.set_website("http://www.fenikspl.eu")
-        about.set_logo(gtk.gdk.pixbuf_new_from_file("pics/tux.png"))
-        about.run()
-        about.destroy()
-
     def __init__(self):
         self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
         self.window.set_position(gtk.WIN_POS_CENTER)
@@ -68,9 +57,6 @@ class Base:
         self.button6 = gtk.Button("Add to Combo")
         self.button6.connect("clicked", self.add_combo)
 
-        self.about_button = gtk.Button("About")
-        self.about_button.connect("clicked", self.about_win)
-
         self.label1 = gtk.Label("New Label")
 
         self.textbox = gtk.Entry()
@@ -81,39 +67,12 @@ class Base:
         self.combo.append_text("This is some text")
         self.combo.append_text("This is option nr2")
 
-        dialog = gtk.FileChooserDialog("Choose an Image",
-            None, gtk.FILE_CHOOSER_ACTION_OPEN,
-            (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
-            gtk.STOCK_OPEN, gtk.RESPONSE_OK))
+        self.pix = gtk.gdk.pixbuf_new_from_file_at_size("pics/aaa.jpg", 100, 100)
+        self.pix = self.pix.scale_simple(300, 300, gtk.gdk.INTERP_BILINEAR)
 
-        dialog.set_default_response(gtk.RESPONSE_OK)
-        filter = gtk.FileFilter()
-        filter.set_name("Images")
-        filter.add_mime_type("image/png")
-        filter.add_mime_type("image/jpg")
-        filter.add_pattern("*.png")
-        filter.add_pattern("*.jpg")
-        filter.add_pattern("*.jpeg")
-        dialog.add_filter(filter)
-
-        response = dialog.run()
-        if response == gtk.RESPONSE_OK:
-             self.pix = gtk.gdk.pixbuf_new_from_file(dialog.get_filename())
-             self.pix = self.pix.scale_simple(300, 300, gtk.gdk.INTERP_BILINEAR)
-
-        elif response == gtk.RESPONSE_CANCEL:
-             print "no file seleted"
-             print "Exiting..."
-             em = gtk.MessageDialog(None, gtk.DIALOG_DESTROY_WITH_PARENT, 
-                  gtk.MESSAGE_ERROR, gtk.BUTTONS_CLOSE,
-                  "ERROR LOADING FILE\nNow Exiting!!!")
-             em.run()
-             em.destroy() 
-             raise SystemExit
-        dialog.destroy()
 
         self.image = gtk.image_new_from_pixbuf(self.pix)
-       
+
 #        self.image = gtk.Image()
 #        self.image.set_from_pixbuf(self.pix)
 
@@ -123,7 +82,6 @@ class Base:
         self.box1.pack_start(self.button3)
         self.box1.pack_start(self.button4)
         self.box1.pack_start(self.button5)
-        self.box1.pack_start(self.about_button)
 
         self.box3 = gtk.HBox()
         self.box3.pack_start(self.textbox)
